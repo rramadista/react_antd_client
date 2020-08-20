@@ -10,6 +10,7 @@ import {
 	TeamOutlined,
 	SettingOutlined,
 	PoweroffOutlined,
+	DashboardOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -25,6 +26,12 @@ const LeftNavMenu = () => (
 		<Menu.Item key='home' icon={<HomeOutlined />}>
 			<Link to='/'>Home</Link>
 		</Menu.Item>
+		<SubMenu key='0' icon={<DashboardOutlined />} title='Analytics'>
+			<Menu.Item key='dashboard'>
+				<Link to='/dashboard'>Dashboard</Link>
+			</Menu.Item>
+			<Menu.Item key='reporting'>Reporting</Menu.Item>
+		</SubMenu>
 		<SubMenu key='1' icon={<ApartmentOutlined />} title='Organization'>
 			<Menu.Item key='office'>
 				<Link to='/office'>Office</Link>
@@ -55,8 +62,8 @@ const LeftNavMenu = () => (
 			<Menu.Item key='kpi'>
 				<Link to='/performance/kpi'>Key Performance Indicators</Link>
 			</Menu.Item>
-			<Menu.Item key='ski'>
-				<Link to='/performance/ski'>Performance Rating</Link>
+			<Menu.Item key='rating'>
+				<Link to='/performance/rating'>Performance Rating</Link>
 			</Menu.Item>
 		</SubMenu>
 		<SubMenu key='5' icon={<SisternodeOutlined />} title='Business Process'>
@@ -70,10 +77,20 @@ const LeftNavMenu = () => (
 				<Link to='/500'>Status 500</Link>
 			</Menu.Item>
 		</SubMenu>
-		<Menu.Item key='settings'>
-			<SettingOutlined />
-			Settings
-		</Menu.Item>
+		<SubMenu key='6' icon={<SettingOutlined />} title='Settings'>
+			<Menu.Item key='profile'>
+				<Link to='/profile'>Profile</Link>
+			</Menu.Item>
+			<Menu.Item key='user'>
+				<Link to='/user'>User</Link>
+			</Menu.Item>
+			<Menu.Item key='group'>
+				<Link to='/group'>Change Group</Link>
+			</Menu.Item>
+			<Menu.Item key='password'>
+				<Link to='/password'>Change Password</Link>
+			</Menu.Item>
+		</SubMenu>
 		<Menu.Item key='logout' icon={<PoweroffOutlined />}>
 			Log Out
 		</Menu.Item>

@@ -9,7 +9,7 @@ const { Content } = Layout;
 
 const DefaultContent = () => {
 	return (
-		<Content style={{ margin: '0 50px' }}>
+		<Content style={{ position: 'sticky', margin: '0 50px' }}>
 			<PageHeader />
 			<Card
 				className='site-layout-background'

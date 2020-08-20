@@ -52,7 +52,9 @@ const PreviewDrawer = ({ onClose, visible, data }) => {
 					</Col>
 				</Row>
 				<Divider />
-				<p className='site-description-item-profile-p'>Company</p>
+				<p className='site-description-item-profile-p'>
+					<strong>Company</strong>
+				</p>
 				<Row>
 					<Col span={12}>
 						<DescriptionItem

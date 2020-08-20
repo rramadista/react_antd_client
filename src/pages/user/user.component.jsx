@@ -4,10 +4,10 @@ import { Table } from 'antd';
 import useGetColumns from './_columns';
 import useFetchTable from '../../utils/function/use-fetch.effect';
 
-const OfficeList = () => {
+const UserList = () => {
 	const columns = useGetColumns();
 	const { data, loading, pagination, handleTableChange } = useFetchTable(
-		`http://localhost:5000/office`
+		`http://localhost:5000/user`
 	);
 
 	return (
@@ -25,4 +25,4 @@ const OfficeList = () => {
 	);
 };
 
-export default OfficeList;
+export default UserList;

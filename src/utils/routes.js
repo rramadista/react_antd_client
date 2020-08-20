@@ -1,11 +1,16 @@
 import React from 'react';
 import Home from '../pages/home/home.component';
+import Dashboard from '../pages/dashboard/dashboard.component';
 import OfficeList from '../pages/office/office-list.component';
+import BranchList from '../pages/branch/branch-list.component';
 import PosTitleList from '../pages/pos-title/pos-title-list.component';
+import PerfRatingList from '../pages/perf-rating/perf-rating.component';
 import Page403 from '../pages/status/page-403/page-403.component';
 import Page404 from '../pages/status/page-404/page-404.component';
 import Page500 from '../pages/status/page-500/page-500.component';
-import PerfRatingList from '../pages/perf-rating/perf-rating.component';
+import Profile from '../pages/profile/profile.component';
+import OrgChart from '../pages/org-chart/org-chart.component';
+import UserList from '../pages/user/user.component';
 
 const sections = [
 	{
@@ -13,6 +18,12 @@ const sections = [
 		exact: true,
 		sidebar: () => <div>Home</div>,
 		main: () => <Home />,
+	},
+	{
+		path: '/dashboard',
+		exact: true,
+		sidebar: () => <div>Dashboard</div>,
+		main: () => <Dashboard />,
 	},
 	{
 		path: '/office',
@@ -24,13 +35,13 @@ const sections = [
 		path: '/branch',
 		exact: true,
 		sidebar: () => <div>Branch</div>,
-		main: () => <h2>Branch Content</h2>,
+		main: () => <BranchList />,
 	},
 	{
 		path: '/organization',
 		exact: true,
 		sidebar: () => <div>Organization</div>,
-		main: () => <h2>Organization Content</h2>,
+		main: () => <OrgChart />,
 	},
 	{
 		path: '/postitle',
@@ -51,10 +62,22 @@ const sections = [
 		main: () => <h2>KPI Content</h2>,
 	},
 	{
-		path: '/performance/ski',
+		path: '/performance/rating',
 		exact: true,
 		sidebar: () => <div>Performance Rating</div>,
 		main: () => <PerfRatingList />,
+	},
+	{
+		path: '/profile',
+		exact: true,
+		sidebar: () => <div>Profile</div>,
+		main: () => <Profile />,
+	},
+	{
+		path: '/user',
+		exact: true,
+		sidebar: () => <div>User</div>,
+		main: () => <UserList />,
 	},
 	{
 		path: '/403',

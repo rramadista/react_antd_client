@@ -11,7 +11,7 @@ const DefaultLeftSider = ({ siderCollapsed }) => {
 		<Sider
 			trigger={null}
 			collapsed={siderCollapsed}
-			collapsedWidth={0}
+			collapsedWidth={80}
 			collapsible
 			width={256}
 		>
