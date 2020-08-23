@@ -1,41 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState, useEffect, useContext } from 'react';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const InlineLoginForm = ({ loadUser, onRouteChange, isSignedIn }) => {
+import UserContext from '../../services/user.context';
+
+const InlineLoginForm = () => {
+	const { setUserData } = useContext(UserContext);
+
 	const [form] = Form.useForm();
+
 	const [, forceUpdate] = useState(); // To disable submit button at the beginning
-	const [signInUserid, setSignInUserid] = useState('');
-	const [signInPassword, setSignInPassword] = useState('');
+	const [loginUserid, setLoginUserid] = useState('');
+	const [loginPassword, setLoginPassword] = useState('');
 
 	useEffect(() => {
 		forceUpdate({});
 	}, []);
 
-	const onUseridChange = (e) => {
-		setSignInUserid(e.target.value);
-	};
+	const messageSuccess = (msg) => message.success(msg);
+	const messageError = (msg) => message.error(msg);
 
-	const onPasswordChange = (e) => {
-		setSignInPassword(e.target.value);
-	};
+	const onSubmitLogin = async () => {
+		try {
+			const loginRes = await fetch('http://localhost:5000/user/login', {
+				method: 'post',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					id: loginUserid,
+					password: loginPassword,
+				}),
+			}).then((res) => res.json());
 
-	const onSubmitLogin = () => {
-		fetch('http://localhost:5000/user/login', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				id: signInUserid,
-				password: signInPassword,
-			}),
-		})
-			.then((res) => res.json())
-			.then((user) => {
-				if (user.id) {
-					loadUser(user);
-					onRouteChange('signin');
-				}
-			});
+			if (loginRes.user) {
+				setUserData({
+					token: loginRes.accessToken,
+					user: loginRes.user,
+				});
+				localStorage.setItem('auth-token', loginRes.accessToken);
+
+				messageSuccess('Login success');
+			} else {
+				return messageError(loginRes.msg);
+			}
+		} catch (err) {
+			messageError(err);
+		}
 	};
 
 	return (
@@ -57,7 +66,7 @@ const InlineLoginForm = ({ loadUser, onRouteChange, isSignedIn }) => {
 				<Input
 					prefix={<UserOutlined className='site-form-item-icon' />}
 					placeholder='Userid'
-					onChange={onUseridChange}
+					onChange={(e) => setLoginUserid(e.target.value)}
 				/>
 			</Form.Item>
 			<Form.Item
@@ -73,7 +82,7 @@ const InlineLoginForm = ({ loadUser, onRouteChange, isSignedIn }) => {
 					prefix={<LockOutlined className='site-form-item-icon' />}
 					type='password'
 					placeholder='Password'
-					onChange={onPasswordChange}
+					onChange={(e) => setLoginPassword(e.target.value)}
 				/>
 			</Form.Item>
 			<Form.Item shouldUpdate>

@@ -6,10 +6,10 @@ import {
 	PoweroffOutlined,
 } from '@ant-design/icons';
 
-const UserMenuDropdown = ({ email, onRouteChange }) => {
+const UserMenuDropdown = ({ displayName, onSubmitLogout }) => {
 	const userMenu = () => (
 		<Menu>
-			<Menu.Item>{email}</Menu.Item>
+			<Menu.Item>{displayName}</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key='0' icon={<UserSwitchOutlined />}>
 				Change Group
@@ -21,7 +21,7 @@ const UserMenuDropdown = ({ email, onRouteChange }) => {
 			<Menu.Item
 				key='3'
 				icon={<PoweroffOutlined />}
-				onClick={() => onRouteChange('signout')}
+				onClick={onSubmitLogout}
 			>
 				Log Out
 			</Menu.Item>

@@ -1,7 +1,4 @@
-import React from 'react';
 import useSearchColumn from '../../utils/function/use-search.state';
-
-// import useColumnSearch from '../../utils/column-search.tools';
 
 const useGetColumns = () => {
 	const { getColumnSearchProps } = useSearchColumn();

@@ -1,36 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Layout, Button } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import UserMenuDropdown from '../components/user-menu-dropdown/user-menu-dropdown.component';
 import InlineLoginForm from '../components/inline-login/inline-login.component';
 
+import UserContext from '../services/user.context';
+
 const { Header } = Layout;
 
 const DefaultHeader = ({ siderCollapsed, onToggleChange }) => {
+	const { userData, setUserData } = useContext(UserContext);
+
 	const [route, setRoute] = useState('signout');
-	const [isSignedIn, setIsSignedIn] = useState(false);
-	const [user, setUser] = useState({
-		id: '',
-		name: '',
-		email: '',
-	});
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	const loadUser = (data) => {
-		setUser({
-			id: data.id,
-			name: data.name,
-			email: data.email,
+	const onSubmitLogout = () => {
+		setUserData({
+			token: undefined,
+			user: undefined,
 		});
-	};
-
-	const onRouteChange = (route) => {
-		if (route === 'signout') {
-			setIsSignedIn(false);
-		} else if (route === 'signin') {
-			setIsSignedIn(true);
-		}
-		setRoute(route);
+		localStorage.setItem('auth-token', '');
 	};
 
 	return (
@@ -43,18 +33,14 @@ const DefaultHeader = ({ siderCollapsed, onToggleChange }) => {
 			>
 				{siderCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
 			</Button>
-			{route === 'signin' ? (
+			{userData.user ? (
 				<UserMenuDropdown
-					email={user.email}
-					onRouteChange={onRouteChange}
-					isSignedIn={isSignedIn}
+					displayName={userData.user.displayName}
+					isLoggedIn={isLoggedIn}
+					onSubmitLogout={onSubmitLogout}
 				/>
 			) : (
-				<InlineLoginForm
-					loadUser={loadUser}
-					onRouteChange={onRouteChange}
-					isSignedIn={isSignedIn}
-				/>
+				<InlineLoginForm isLoggedIn={isLoggedIn} />
 			)}
 		</Header>
 	);

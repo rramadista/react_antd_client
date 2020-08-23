@@ -62,7 +62,7 @@ const Dashboard = () => {
 					<Card
 						hoverable
 						title='Headcount'
-						extra={<a href='#'>More</a>}
+						// extra={<a href='#'>More</a>}
 					>
 						<Meta title='Bank Mega' description='as per May 2020' />
 						<BasicChart />
@@ -74,18 +74,26 @@ const Dashboard = () => {
 					<Card
 						hoverable
 						title='Recruitment Pipeline'
-						extra={<a href='#'>More</a>}
+						// extra={<a href='#'>More</a>}
 					>
 						<FunnelChart />
 					</Card>
 				</Col>
 				<Col span={6}>
-					<Card hoverable title='KPI #1' extra={<a href='#'>More</a>}>
+					<Card
+						hoverable
+						title='KPI #1'
+						// extra={<a href='#'>More</a>}
+					>
 						<GaugeChart />
 					</Card>
 				</Col>
 				<Col span={6}>
-					<Card hoverable title='KPI #2' extra={<a href='#'>More</a>}>
+					<Card
+						hoverable
+						title='KPI #2'
+						// extra={<a href='#'>More</a>}
+					>
 						<GaugeChart />
 					</Card>
 				</Col>
