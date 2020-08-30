@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Layout, Button } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
@@ -11,9 +11,6 @@ const { Header } = Layout;
 
 const DefaultHeader = ({ siderCollapsed, onToggleChange }) => {
 	const { userData, setUserData } = useContext(UserContext);
-
-	const [route, setRoute] = useState('signout');
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const onSubmitLogout = () => {
 		setUserData({
@@ -36,11 +33,10 @@ const DefaultHeader = ({ siderCollapsed, onToggleChange }) => {
 			{userData.user ? (
 				<UserMenuDropdown
 					displayName={userData.user.displayName}
-					isLoggedIn={isLoggedIn}
 					onSubmitLogout={onSubmitLogout}
 				/>
 			) : (
-				<InlineLoginForm isLoggedIn={isLoggedIn} />
+				<InlineLoginForm />
 			)}
 		</Header>
 	);

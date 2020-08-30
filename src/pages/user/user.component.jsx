@@ -7,7 +7,7 @@ import useFetchTable from '../../utils/function/use-fetch.effect';
 const UserList = () => {
 	const columns = useGetColumns();
 	const { data, loading, pagination, handleTableChange } = useFetchTable(
-		`http://localhost:5000/user`
+		`http://localhost:5000/user/all`
 	);
 
 	return (

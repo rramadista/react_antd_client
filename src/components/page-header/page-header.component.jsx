@@ -26,7 +26,7 @@ const PageHeader = () => {
 					<PageHeaderAntd
 						className='site-page-header'
 						onBack={() => null}
-						title={<route.sidebar />}
+						title={route.title}
 						subTitle='This is a subtitle'
 						breadcrumb={{ routes }}
 						extra={[

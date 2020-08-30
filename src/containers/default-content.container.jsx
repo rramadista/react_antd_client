@@ -25,7 +25,7 @@ const DefaultContent = () => {
 							key={index}
 							path={route.path}
 							exact={route.exact}
-							children={<route.main />}
+							children={route.component}
 						/>
 					))}
 				</Switch>

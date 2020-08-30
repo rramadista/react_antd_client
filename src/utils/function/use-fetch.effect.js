@@ -12,6 +12,7 @@ const useFetchTable = (url) => {
 
 	useEffect(() => {
 		fetchData({ pagination });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleTableChange = (pagination, filters, sorter) => {

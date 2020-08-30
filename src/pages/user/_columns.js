@@ -5,13 +5,13 @@ const useGetColumns = () => {
 
 	const columns = [
 		{
-			title: 'Emp ID',
+			title: 'User ID',
 			dataIndex: 'id',
 			key: 'id',
 			...getColumnSearchProps('id'),
 		},
 		{
-			title: 'Emp Name',
+			title: 'User Name',
 			dataIndex: 'name',
 			key: 'name',
 		},

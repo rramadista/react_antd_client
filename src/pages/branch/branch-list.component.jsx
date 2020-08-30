@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button, Space, message } from 'antd';
+import { Table, Button, Space } from 'antd';
 
 import useGetColumns from './_columns';
 import useFetchTable from '../../utils/function/use-fetch.effect';
@@ -19,16 +19,9 @@ const BranchList = () => {
 		setVisible(false);
 	};
 
-	const success = () => message.success('This is a success message');
-	const error = () => message.error('This is an error message');
-	const warning = () => message.warning('This is a warning message');
-
 	return (
 		<>
 			<Space>
-				<Button onClick={success}>Success</Button>
-				<Button onClick={error}>Error</Button>
-				<Button onClick={warning}>Warning</Button>
 				<Button
 					type='primary'
 					onClick={() => {
