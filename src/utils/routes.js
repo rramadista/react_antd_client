@@ -13,6 +13,7 @@ import Profile from '../pages/profile/profile.component';
 import OrgChart from '../pages/org-chart/org-chart.component';
 import UserList from '../pages/user/user.component';
 import EmployeeList from '../pages/employee/employee.component';
+import OrgGroupList from '../pages/org-group/org-group-list.component';
 
 const sections = [
 	{ path: '/', exact: true, title: 'Home', component: () => <Home /> },
@@ -22,6 +23,16 @@ const sections = [
 	{
 		path: '/org-chart',
 		title: 'Organization Chart',
+		component: () => <OrgChart />,
+	},
+	{
+		path: '/org-group',
+		title: 'Organization Group',
+		component: () => <OrgGroupList />,
+	},
+	{
+		path: '/organization',
+		title: 'Organization',
 		component: () => <OrgChart />,
 	},
 	{

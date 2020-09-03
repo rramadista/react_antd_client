@@ -8,6 +8,7 @@ const useFetchTable = (url) => {
 		pageSize: 10,
 		showTotal: (total, range) =>
 			`${range[0]}-${range[1]} of ${total} items`,
+		hideOnSinglePage: true, // hide pagination when single page or no data
 	});
 
 	useEffect(() => {

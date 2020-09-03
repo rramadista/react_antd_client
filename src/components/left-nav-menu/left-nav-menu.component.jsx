@@ -44,6 +44,12 @@ const LeftNavMenu = () => (
 			<Menu.Item key='orgchart'>
 				<Link to='/org-chart'>Organization Chart</Link>
 			</Menu.Item>
+			<Menu.Item key='orggroup'>
+				<Link to='/org-group'>Organization Group</Link>
+			</Menu.Item>
+			<Menu.Item key='organization'>
+				<Link to='/organization'>Organization</Link>
+			</Menu.Item>
 		</SubMenu>
 		{/* Position */}
 		<SubMenu key='pos' icon={<UserOutlined />} title='Position'>

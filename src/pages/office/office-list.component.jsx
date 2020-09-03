@@ -13,7 +13,7 @@ const OfficeList = () => {
 
 	return (
 		<>
-			<Button type='primary'>
+			<Button type='primary' style={{ marginBottom: 16 }}>
 				<CSVLink data={data} filename={'office.csv'}>
 					Download
 				</CSVLink>
