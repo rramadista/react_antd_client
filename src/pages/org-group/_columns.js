@@ -11,20 +11,8 @@ const useGetColumns = () => {
 		fetch(`http://localhost:5000/org-group/${id}`, {
 			method: 'DELETE',
 		}).catch((err) => console.log(err));
-		message.success('Success deleted record');
+		message.success(`Success deleted ${id} record`);
 	};
-
-	// const onDeleteConfirm = (e) => {
-	// 	console.log(e);
-	// 	fetch(`http://localhost:5000/org-group/${e}`, {
-	// 		method: 'delete',
-	// 		headers: { 'Content-Type': 'application/json' },
-	// 		body: JSON.stringify({ e }),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.catch((err) => console.log(err));
-	// 	message.success('Success deleted record');
-	// };
 
 	const columns = [
 		{
@@ -45,7 +33,7 @@ const useGetColumns = () => {
 			title: 'Organization Group Name',
 			dataIndex: 'name',
 			key: 'name',
-			...getColumnSearchProps('code'),
+			...getColumnSearchProps('name'),
 			width: 400,
 		},
 		{

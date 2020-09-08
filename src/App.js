@@ -5,6 +5,7 @@ import './App.css';
 import UserContext from './services/user.context';
 
 import DefaultLayout from './containers/default-layout.container';
+import ThemeProvider from './pages/hooks/theme.context';
 
 const App = () => {
 	const [userData, setUserData] = useState({
@@ -46,11 +47,13 @@ const App = () => {
 
 	return (
 		<>
-			<UserContext.Provider value={{ userData, setUserData }}>
-				<Switch>
-					<Route path='/' name='Home' component={DefaultLayout} />
-				</Switch>
-			</UserContext.Provider>
+			<ThemeProvider>
+				<UserContext.Provider value={{ userData, setUserData }}>
+					<Switch>
+						<Route path='/' name='Home' component={DefaultLayout} />
+					</Switch>
+				</UserContext.Provider>
+			</ThemeProvider>
 		</>
 	);
 };

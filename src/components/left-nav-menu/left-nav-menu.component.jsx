@@ -12,6 +12,7 @@ import {
 	UserOutlined,
 	SettingOutlined,
 	DashboardOutlined,
+	AntDesignOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -108,6 +109,31 @@ const LeftNavMenu = () => (
 				<Link to='/500'>Status 500</Link>
 			</Menu.Item>
 		</SubMenu>
+		{/* React Hooks */}
+		<SubMenu key='hooks' icon={<AntDesignOutlined />} title='React Hooks'>
+			<Menu.Item key='state'>
+				<Link to='/state'>useState</Link>
+			</Menu.Item>
+			<Menu.Item key='effect'>
+				<Link to='/effect'>useEffect</Link>
+			</Menu.Item>
+			<Menu.Item key='memo'>
+				<Link to='/memo'>useMemo</Link>
+			</Menu.Item>
+			<Menu.Item key='ref'>
+				<Link to='/ref'>useRef</Link>
+			</Menu.Item>
+			<Menu.Item key='context'>
+				<Link to='/context'>useContext</Link>
+			</Menu.Item>
+			<Menu.Item key='reducer'>
+				<Link to='/reducer'>useReducer</Link>
+			</Menu.Item>
+			<Menu.Item key='callback'>
+				<Link to='/callback'>useCallback</Link>
+			</Menu.Item>
+		</SubMenu>
+		{/* Settings */}
 		<SubMenu key='setting' icon={<SettingOutlined />} title='Settings'>
 			<Menu.Item key='profile'>
 				<Link to='/profile'>Profile</Link>

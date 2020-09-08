@@ -1,28 +1,15 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, Button, message } from 'antd';
+import { Modal, Form, Input, Button } from 'antd';
 
-const AddFormModal = () => {
+const AddFormModal = ({ onCreate, visible, setVisible }) => {
 	const [form] = Form.useForm();
 
 	const initValue = { id: '', code: '', name: '' };
 	const [formValues, setFormValues] = useState(initValue);
 
-	const [visible, setVisible] = useState(false);
-
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setFormValues({ ...formValues, [name]: value });
-	};
-
-	const onCreate = (values) => {
-		setVisible(false);
-		console.log('Received values of form: ', values);
-		fetch(`http://localhost:5000/org-group`, {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(values),
-		}).then((res) => res.json());
-		message.success('Success created record');
 	};
 
 	return (

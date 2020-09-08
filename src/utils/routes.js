@@ -14,6 +14,11 @@ import OrgChart from '../pages/org-chart/org-chart.component';
 import UserList from '../pages/user/user.component';
 import EmployeeList from '../pages/employee/employee.component';
 import OrgGroupList from '../pages/org-group/org-group-list.component';
+import UseStateExample from '../pages/hooks/use-state.component';
+import UseEffectExample from '../pages/hooks/use-effect.component';
+import UseMemoExample from '../pages/hooks/use-memo.component';
+import UseRefExample from '../pages/hooks/use-ref.component';
+import UseContextExample from '../pages/hooks/use-context.component';
 
 const sections = [
 	{ path: '/', exact: true, title: 'Home', component: () => <Home /> },
@@ -63,6 +68,17 @@ const sections = [
 	{ path: '/403', title: 'Page 403', component: () => <Page403 /> },
 	{ path: '/404', title: 'Page 404', component: () => <Page404 /> },
 	{ path: '/500', title: 'Page 500', component: () => <Page500 /> },
+	{ path: '/state', title: 'useState', component: <UseStateExample /> },
+	{ path: '/effect', title: 'useEffect', component: <UseEffectExample /> },
+	{ path: '/memo', title: 'useMemo', component: <UseMemoExample /> },
+	{ path: '/ref', title: 'useRef', component: <UseRefExample /> },
+	{ path: '/context', title: 'useContext', component: <UseContextExample /> },
+	{ path: '/reducer', title: 'useReducer', component: <h2>useReducer</h2> },
+	{
+		path: '/callback',
+		title: 'useCallback',
+		component: <h2>useCallback</h2>,
+	},
 ];
 
 export default sections;
