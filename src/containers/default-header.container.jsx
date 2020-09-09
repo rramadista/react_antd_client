@@ -7,9 +7,11 @@ import InlineLoginForm from '../components/inline-login/inline-login.component';
 
 import UserContext from '../services/user.context';
 
+import { useLayout, useLayoutUpdate } from '../services/hooks/layout.context';
+
 const { Header } = Layout;
 
-const DefaultHeader = ({ siderCollapsed, onToggleChange }) => {
+const DefaultHeader = () => {
 	const { userData, setUserData } = useContext(UserContext);
 
 	const onSubmitLogout = () => {
@@ -19,6 +21,9 @@ const DefaultHeader = ({ siderCollapsed, onToggleChange }) => {
 		});
 		localStorage.setItem('auth-token', '');
 	};
+
+	const siderCollapsed = useLayout();
+	const onToggleChange = useLayoutUpdate();
 
 	return (
 		<Header style={{ background: 'white' }}>

@@ -23,7 +23,6 @@ const LeftNavMenu = () => (
 		defaultOpenKeys={[]}
 		mode='inline'
 		theme='dark'
-		inlineCollapsed={false}
 	>
 		<Menu.Item key='home' icon={<HomeOutlined />}>
 			<Link to='/'>Home</Link>

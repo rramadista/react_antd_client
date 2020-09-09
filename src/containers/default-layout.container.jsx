@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 
 import {
@@ -8,25 +8,20 @@ import {
 	DefaultFooter,
 } from './index';
 
+import LayoutProvider from '../services/hooks/layout.context';
+
 const DefaultLayout = () => {
-	const [siderCollapsed, setSiderCollapsed] = useState(true);
-
-	const onToggleChange = () => {
-		setSiderCollapsed(!siderCollapsed);
-	};
-
 	return (
-		<Layout style={{ minHeight: '100vh' }}>
-			<DefaultLeftSider siderCollapsed={siderCollapsed} />
-			<Layout>
-				<DefaultHeader
-					siderCollapsed={siderCollapsed}
-					onToggleChange={onToggleChange}
-				/>
-				<DefaultContent />
-				<DefaultFooter />
+		<LayoutProvider>
+			<Layout style={{ minHeight: '100vh' }}>
+				<DefaultLeftSider />
+				<Layout>
+					<DefaultHeader />
+					<DefaultContent />
+					<DefaultFooter />
+				</Layout>
 			</Layout>
-		</Layout>
+		</LayoutProvider>
 	);
 };
 
