@@ -19,6 +19,7 @@ import UseEffectExample from '../pages/hooks/use-effect.component';
 import UseMemoExample from '../pages/hooks/use-memo.component';
 import UseRefExample from '../pages/hooks/use-ref.component';
 import UseContextExample from '../pages/hooks/use-context.component';
+import UseReducerExample from '../pages/hooks/use-reducer.component';
 
 const sections = [
 	{ path: '/', exact: true, title: 'Home', component: () => <Home /> },
@@ -73,7 +74,7 @@ const sections = [
 	{ path: '/memo', title: 'useMemo', component: <UseMemoExample /> },
 	{ path: '/ref', title: 'useRef', component: <UseRefExample /> },
 	{ path: '/context', title: 'useContext', component: <UseContextExample /> },
-	{ path: '/reducer', title: 'useReducer', component: <h2>useReducer</h2> },
+	{ path: '/reducer', title: 'useReducer', component: <UseReducerExample /> },
 	{
 		path: '/callback',
 		title: 'useCallback',
