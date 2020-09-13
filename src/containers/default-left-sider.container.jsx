@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout } from 'antd';
 
-import { useLayout } from '../services/hooks/layout.context';
+import { LayoutContext } from '../services/hooks/layout.context';
 
 import Brand from '../components/brand/brand.component';
 import LeftNavMenu from '../components/left-nav-menu/left-nav-menu.component';
@@ -9,7 +9,7 @@ import LeftNavMenu from '../components/left-nav-menu/left-nav-menu.component';
 const { Sider } = Layout;
 
 const DefaultLeftSider = () => {
-	const siderCollapsed = useLayout();
+	const { siderCollapsed } = useContext(LayoutContext);
 
 	return (
 		<Sider

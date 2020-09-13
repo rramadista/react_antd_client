@@ -1,15 +1,9 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
-const LayoutContext = createContext();
-const LayoutUpdateContext = createContext();
-
-export const useLayout = () => {
-	return useContext(LayoutContext);
-};
-
-export const useLayoutUpdate = () => {
-	return useContext(LayoutUpdateContext);
-};
+export const LayoutContext = createContext({
+	siderCollapsed: true,
+	setSiderCollapsed: () => {},
+});
 
 const LayoutProvider = ({ children }) => {
 	const [siderCollapsed, setSiderCollapsed] = useState(true);
@@ -19,10 +13,8 @@ const LayoutProvider = ({ children }) => {
 	};
 
 	return (
-		<LayoutContext.Provider value={siderCollapsed}>
-			<LayoutUpdateContext.Provider value={onToggleChange}>
-				{children}
-			</LayoutUpdateContext.Provider>
+		<LayoutContext.Provider value={{ siderCollapsed, onToggleChange }}>
+			{children}
 		</LayoutContext.Provider>
 	);
 };

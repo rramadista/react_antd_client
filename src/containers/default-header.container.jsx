@@ -6,8 +6,7 @@ import UserMenuDropdown from '../components/user-menu-dropdown/user-menu-dropdow
 import InlineLoginForm from '../components/inline-login/inline-login.component';
 
 import UserContext from '../services/user.context';
-
-import { useLayout, useLayoutUpdate } from '../services/hooks/layout.context';
+import { LayoutContext } from '../services/hooks/layout.context';
 
 const { Header } = Layout;
 
@@ -22,8 +21,7 @@ const DefaultHeader = () => {
 		localStorage.setItem('auth-token', '');
 	};
 
-	const siderCollapsed = useLayout();
-	const onToggleChange = useLayoutUpdate();
+	const { siderCollapsed, onToggleChange } = useContext(LayoutContext);
 
 	return (
 		<Header style={{ background: 'white' }}>
