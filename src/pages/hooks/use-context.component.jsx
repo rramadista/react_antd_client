@@ -1,12 +1,12 @@
-import React from 'react';
-import { useTheme, useThemeUpdate } from './theme.context';
+import React, { useContext } from 'react';
+import { ThemeContext } from './theme.context';
 import { Card, Button } from 'antd';
 
 const { Meta } = Card;
 
 const UseContextExample = () => {
-	const darkTheme = useTheme();
-	const toggleTheme = useThemeUpdate();
+	const { darkTheme, toggleTheme } = useContext(ThemeContext);
+
 	const themeStyles = {
 		backgroundColor: darkTheme ? 'gold' : 'white',
 		width: 240,

@@ -78,9 +78,6 @@ const OrgGroupList = () => {
 		});
 	};
 
-	// Test Use Get Columns
-	const { getColumnSearchProps } = useSearchColumn();
-
 	const onDeleteConfirm = (id) => {
 		console.log(id);
 		fetch(`http://localhost:5000/org-group/${id}`, {
@@ -90,6 +87,9 @@ const OrgGroupList = () => {
 			.catch((err) => console.log(err));
 		message.success(`Success deleted ${id} record`);
 	};
+
+	// Test Use Get Columns
+	const { getColumnSearchProps } = useSearchColumn();
 
 	const columns = [
 		{
@@ -143,6 +143,7 @@ const OrgGroupList = () => {
 					onCreate={onCreate}
 					visible={visible}
 					setVisible={setVisible}
+					buttonLabel='Add'
 				/>
 			</Space>
 			<Table

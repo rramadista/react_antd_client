@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Card } from 'antd';
 
-import { TODO_ACTIONS } from './use-reducer.component';
+import { deleteItem, toggleItem } from './todo.actions';
 
-const Todo = ({ todo, dispatch }) => {
+const Todo = ({ item, dispatch }) => {
 	return (
 		<>
 			<Card
@@ -11,31 +11,17 @@ const Todo = ({ todo, dispatch }) => {
 				title='Data'
 				extra={
 					<>
-						<Button
-							onClick={() =>
-								dispatch({
-									type: TODO_ACTIONS.TOGGLE_TODO,
-									payload: { id: todo.id },
-								})
-							}
-						>
+						<Button onClick={() => dispatch(toggleItem(item))}>
 							Toggle
 						</Button>
-						<Button
-							onClick={() =>
-								dispatch({
-									type: TODO_ACTIONS.DELETE_TODO,
-									payload: { id: todo.id },
-								})
-							}
-						>
+						<Button onClick={() => dispatch(deleteItem(item))}>
 							Delete
 						</Button>
 					</>
 				}
-				style={{ width: 300, color: todo.complete ? '#AAA' : '#000' }}
+				style={{ width: 300, color: item.complete ? '#AAA' : '#000' }}
 			>
-				{todo.name}
+				{item.name}
 			</Card>
 		</>
 	);

@@ -1,17 +1,10 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
-const ThemeContext = createContext();
-const ThemeUpdateContext = createContext();
+export const ThemeContext = createContext({
+	darkTheme: true,
+	toggleTheme: () => {},
+});
 
-export const useTheme = () => {
-	return useContext(ThemeContext);
-};
-
-export const useThemeUpdate = () => {
-	return useContext(ThemeUpdateContext);
-};
-
-// Component Context Provider
 const ThemeProvider = ({ children }) => {
 	const [darkTheme, setDarkTheme] = useState(true);
 
@@ -20,10 +13,8 @@ const ThemeProvider = ({ children }) => {
 	};
 
 	return (
-		<ThemeContext.Provider value={darkTheme}>
-			<ThemeUpdateContext.Provider value={toggleTheme}>
-				{children}
-			</ThemeUpdateContext.Provider>
+		<ThemeContext.Provider value={{ darkTheme, toggleTheme }}>
+			{children}
 		</ThemeContext.Provider>
 	);
 };

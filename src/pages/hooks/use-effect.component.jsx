@@ -17,7 +17,8 @@ const UseEffectExample = () => {
 		window.addEventListener('resize', handleResize);
 		fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
 			.then((res) => res.json())
-			.then((json) => setItems(json));
+			.then((json) => setItems(json))
+			.catch((err) => console.log(err));
 		console.log('Resource changed');
 
 		// Cleaning Up

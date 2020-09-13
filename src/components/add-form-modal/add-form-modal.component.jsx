@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Form, Input, Button } from 'antd';
 
-const AddFormModal = ({ onCreate, visible, setVisible }) => {
+const AddFormModal = ({ onCreate, visible, setVisible, buttonLabel }) => {
 	const [form] = Form.useForm();
 
 	const initValue = { id: '', code: '', name: '' };
@@ -19,7 +19,7 @@ const AddFormModal = ({ onCreate, visible, setVisible }) => {
 				onClick={() => setVisible(true)}
 				style={{ marginBottom: 16 }}
 			>
-				Add
+				{buttonLabel}
 			</Button>
 			<Modal
 				visible={visible}
