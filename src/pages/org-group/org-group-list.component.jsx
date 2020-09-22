@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, message, Space } from 'antd';
+import { CSVLink } from 'react-csv';
 
-// import useGetColumns from './_columns';
-// import useFetchTable from '../../utils/function/use-fetch.effect';
 import AddFormModal from '../../components/add-form-modal/add-form-modal.component';
 
 import TableActionButton from '../../components/table-action-button/table-action-button.component';
 import useSearchColumn from '../../utils/function/use-search.state';
+import ModalForm from '../../components/modal-form/modal-form.component';
+import DataTable from '../../components/data-table/data-table.component';
 
 const OrgGroupList = () => {
-	// const columns = useGetColumns();
-
-	// const { data, loading, pagination, handleTableChange } = useFetchTable(
-	// 	`http://localhost:5000/org-group`
-	// );
-
 	// Test Use Fetch
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -41,6 +36,7 @@ const OrgGroupList = () => {
 		});
 	};
 
+	// Get Data
 	const fetchData = (params = {}) => {
 		setLoading(true);
 		fetch(`http://localhost:5000/org-group`)
@@ -70,16 +66,22 @@ const OrgGroupList = () => {
 		message.success(`Success created ${values.id} record`);
 	};
 
-	const onUpdate = (id) => {
+	const onUpdate = (values) => {
 		setVisible(false);
-		fetch(`http://localhost:5000/org-group/${id}`, {
+		console.log('Received values of form: ', values);
+		fetch(`http://localhost:5000/org-group/${values.id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
-		});
+			body: JSON.stringify(values),
+		})
+			.then((res) => res.json())
+			.then(() => fetchData({ pagination }))
+			.catch((err) => console.log(err));
+		message.success(`Success updated ${values.id} record`);
 	};
 
 	const onDeleteConfirm = (id) => {
-		console.log(id);
+		console.log('Received values of form: ', id);
 		fetch(`http://localhost:5000/org-group/${id}`, {
 			method: 'DELETE',
 		})
@@ -119,9 +121,12 @@ const OrgGroupList = () => {
 			render: (text, record) => (
 				<TableActionButton
 					onDeleteConfirm={() => onDeleteConfirm(record.id)}
-					onUpdate={onUpdate}
+					onUpdate={() => onUpdate(record)}
 					visible={visible}
 					setVisible={setVisible}
+					record={record}
+					fetchData={fetchData}
+					pagination={pagination}
 				/>
 			),
 		},
@@ -131,7 +136,6 @@ const OrgGroupList = () => {
 		<>
 			<Space>
 				<Button
-					type='primary'
 					onClick={() =>
 						message.info('This should be success message')
 					}
@@ -139,11 +143,17 @@ const OrgGroupList = () => {
 				>
 					Message
 				</Button>
+				<Button style={{ marginBottom: 16 }}>
+					<CSVLink data={data} filename={'dummy.csv'}>
+						Download
+					</CSVLink>
+				</Button>
+				<ModalForm buttonLabel='Add' />
 				<AddFormModal
+					buttonLabel='Add'
 					onCreate={onCreate}
 					visible={visible}
 					setVisible={setVisible}
-					buttonLabel='Add'
 				/>
 			</Space>
 			<Table
@@ -154,6 +164,14 @@ const OrgGroupList = () => {
 				loading={loading}
 				onChange={handleTableChange}
 				size='small'
+			/>
+			<DataTable
+				dataSource={data}
+				columns={columns}
+				rowKey={(record) => record.id}
+				pagination={pagination}
+				loading={loading}
+				onChange={handleTableChange}
 			/>
 		</>
 	);

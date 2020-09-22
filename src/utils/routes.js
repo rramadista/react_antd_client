@@ -21,6 +21,7 @@ import UseRefExample from '../pages/hooks/use-ref.component';
 import UseContextExample from '../pages/hooks/use-context.component';
 import UseReducerExample from '../pages/hooks/use-reducer.component';
 import UseCallbackExample from '../pages/hooks/use-callback.component';
+import OrgGroupPage from '../pages/org-group/org-group.component';
 
 const sections = [
 	{ path: '/', exact: true, title: 'Home', component: () => <Home /> },
@@ -36,6 +37,11 @@ const sections = [
 		path: '/org-group',
 		title: 'Organization Group',
 		component: () => <OrgGroupList />,
+	},
+	{
+		path: '/org-group-page',
+		title: 'Organization Group Page',
+		component: () => <OrgGroupPage />,
 	},
 	{
 		path: '/organization',

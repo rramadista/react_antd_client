@@ -1,11 +1,16 @@
 import React from 'react';
 import { Space, Button, Popconfirm } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
+import ModalForm from '../modal-form/modal-form.component';
 
-const TableActionButton = ({ onDeleteConfirm }) => {
+const TableActionButton = ({ onDeleteConfirm, updateData, record }) => {
 	return (
 		<Space>
-			<Button icon={<EditOutlined />}>Edit</Button>
+			<ModalForm
+				buttonLabel='Edit'
+				updateData={updateData}
+				record={record}
+			/>
 			<Popconfirm
 				title='Are you sure to delete this row?'
 				onConfirm={onDeleteConfirm}

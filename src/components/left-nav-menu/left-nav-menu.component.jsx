@@ -47,6 +47,9 @@ const LeftNavMenu = () => (
 			<Menu.Item key='orggroup'>
 				<Link to='/org-group'>Organization Group</Link>
 			</Menu.Item>
+			<Menu.Item key='orggrouppage'>
+				<Link to='/org-group-page'>Org Group Page</Link>
+			</Menu.Item>
 			<Menu.Item key='organization'>
 				<Link to='/organization'>Organization</Link>
 			</Menu.Item>
