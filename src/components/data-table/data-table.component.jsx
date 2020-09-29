@@ -3,7 +3,7 @@ import { Table, message } from 'antd';
 import TableActionButton from '../table-action-button/table-action-button.component';
 import useSearchColumn from '../../utils/function/use-search.state';
 
-const DataTable = ({ data, setData, updateData, deleteItemFromData }) => {
+const DataTable = ({ data, setData, updateDataItem, deleteItemFromData }) => {
 	const [loading, setLoading] = useState(false);
 	const [pagination, setPagination] = useState({
 		current: 1,
@@ -62,6 +62,9 @@ const DataTable = ({ data, setData, updateData, deleteItemFromData }) => {
 			dataIndex: 'id',
 			key: 'id',
 			...getColumnSearchProps('id'),
+			sorter: (a, b) => a.id.localeCompare(b.id),
+			defaultSortOrder: 'ascend',
+			sortDirections: ['descend', 'ascend', 'descend'],
 			width: 150,
 		},
 		{
@@ -69,13 +72,17 @@ const DataTable = ({ data, setData, updateData, deleteItemFromData }) => {
 			dataIndex: 'code',
 			key: 'code',
 			...getColumnSearchProps('code'),
-			width: 150,
+			sorter: (a, b) => a.code.localeCompare(b.code),
+			sortDirections: ['ascend', 'descend'],
+			width: 170,
 		},
 		{
 			title: 'Organization Group Name',
 			dataIndex: 'name',
 			key: 'name',
 			...getColumnSearchProps('name'),
+			sorter: (a, b) => a.name.localeCompare(b.name),
+			sortDirections: ['ascend', 'descend'],
 			width: 400,
 		},
 		{
@@ -84,7 +91,7 @@ const DataTable = ({ data, setData, updateData, deleteItemFromData }) => {
 			render: (text, record) => (
 				<TableActionButton
 					onDeleteConfirm={() => onDeleteConfirm(record.id)}
-					updateData={updateData}
+					updateDataItem={updateDataItem}
 					record={record}
 				/>
 			),
@@ -100,6 +107,7 @@ const DataTable = ({ data, setData, updateData, deleteItemFromData }) => {
 			loading={loading}
 			onChange={handleTableChange}
 			size='small'
+			rowSelection
 		/>
 	);
 };

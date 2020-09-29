@@ -6,6 +6,7 @@ import UserContext from './services/user.context';
 
 import DefaultLayout from './containers/default-layout.container';
 import ThemeProvider from './pages/hooks/theme.context';
+import DataTableProvider from './services/hooks/data-table/data-table.context';
 
 const App = () => {
 	const [userData, setUserData] = useState({
@@ -47,13 +48,19 @@ const App = () => {
 
 	return (
 		<>
-			<ThemeProvider>
-				<UserContext.Provider value={{ userData, setUserData }}>
-					<Switch>
-						<Route path='/' name='Home' component={DefaultLayout} />
-					</Switch>
-				</UserContext.Provider>
-			</ThemeProvider>
+			<DataTableProvider>
+				<ThemeProvider>
+					<UserContext.Provider value={{ userData, setUserData }}>
+						<Switch>
+							<Route
+								path='/'
+								name='Home'
+								component={DefaultLayout}
+							/>
+						</Switch>
+					</UserContext.Provider>
+				</ThemeProvider>
+			</DataTableProvider>
 		</>
 	);
 };

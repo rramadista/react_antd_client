@@ -4,6 +4,7 @@ import { Space } from 'antd';
 import ModalForm from '../../components/modal-form/modal-form.component';
 import DataTable from '../../components/data-table/data-table.component';
 import DownloadButton from '../../components/download-button/download-button.component';
+import UploadButton from '../../components/upload-button/upload-button.component';
 
 const OrgGroupPage = () => {
 	const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const OrgGroupPage = () => {
 		setData([...data, item]);
 	};
 
-	const updateData = (item) => {
+	const updateDataItem = (item) => {
 		const itemIndex = data.findIndex((record) => record.id === item.id);
 		const updatedData = [
 			...data.slice(0, itemIndex),
@@ -31,12 +32,13 @@ const OrgGroupPage = () => {
 		<>
 			<Space>
 				<DownloadButton data={data} filename='org-group' />
+				<UploadButton />
 				<ModalForm buttonLabel='Add' addItemToData={addItemToData} />
 			</Space>
 			<DataTable
 				data={data}
 				setData={setData}
-				updateData={updateData}
+				updateDataItem={updateDataItem}
 				deleteItemFromData={deleteItemFromData}
 			/>
 		</>
