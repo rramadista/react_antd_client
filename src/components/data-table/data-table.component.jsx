@@ -3,7 +3,13 @@ import { Table, message } from 'antd';
 import TableActionButton from '../table-action-button/table-action-button.component';
 import useSearchColumn from '../../utils/function/use-search.state';
 
-const DataTable = ({ data, setData, updateDataItem, deleteItemFromData }) => {
+const DataTable = ({
+	data,
+	setData,
+	updateDataItem,
+	deleteItemFromData,
+	rowSelection,
+}) => {
 	const [loading, setLoading] = useState(false);
 	const [pagination, setPagination] = useState({
 		current: 1,
@@ -107,7 +113,7 @@ const DataTable = ({ data, setData, updateDataItem, deleteItemFromData }) => {
 			loading={loading}
 			onChange={handleTableChange}
 			size='small'
-			rowSelection
+			rowSelection={rowSelection}
 		/>
 	);
 };
