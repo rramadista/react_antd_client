@@ -15,6 +15,10 @@ const OrgGroupPage = () => {
 		setData([...data, item]);
 	};
 
+	const addMultipleItemsToData = (items) => {
+		setData(data.concat(items));
+	};
+
 	const updateDataItem = (item) => {
 		const itemIndex = data.findIndex((record) => record.id === item.id);
 		const updatedData = [
@@ -42,7 +46,7 @@ const OrgGroupPage = () => {
 		<>
 			<Space>
 				<DownloadButton data={data} filename='org-group' />
-				<UploadButton />
+				<UploadButton addMultipleItemsToData={addMultipleItemsToData} />
 				<ModalForm buttonLabel='Add' addItemToData={addItemToData} />
 				<Button
 					type='primary'
