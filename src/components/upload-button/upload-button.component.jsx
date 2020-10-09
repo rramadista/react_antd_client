@@ -22,17 +22,21 @@ const UploadButton = ({ addMultipleItemsToData }) => {
 			accept='.txt, .csv'
 			showUploadList={false}
 			beforeUpload={(file) => {
-				const reader = new FileReader();
+				if (file.type !== 'application/vnd.ms-excel') {
+					message.error('You can only upload XLS or CSV file');
+				} else {
+					const reader = new FileReader();
 
-				reader.onload = (e) => {
-					const files = papa.parse(e.target.result, {
-						header: true,
-						skipEmptyLines: true,
-					});
-					onUpload(files.data);
-				};
+					reader.onload = (e) => {
+						const files = papa.parse(e.target.result, {
+							header: true,
+							skipEmptyLines: true,
+						});
+						onUpload(files.data);
+					};
 
-				reader.readAsText(file);
+					reader.readAsText(file);
+				}
 
 				return false;
 			}}
