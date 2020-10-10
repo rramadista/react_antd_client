@@ -3,7 +3,12 @@ import { Button, Modal, Form, message } from 'antd';
 import { EditOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import AddEditForm from '../add-edit-form/add-edit-form.component';
 
-const ModalForm = ({ buttonLabel, record, updateDataItem, addItemToData }) => {
+const ModalButton = ({
+	buttonLabel,
+	record,
+	updateDataItem,
+	addItemToData,
+}) => {
 	const [form] = Form.useForm();
 	const [visible, setVisible] = useState(false);
 
@@ -99,4 +104,4 @@ const ModalForm = ({ buttonLabel, record, updateDataItem, addItemToData }) => {
 	);
 };
 
-export default ModalForm;
+export default ModalButton;

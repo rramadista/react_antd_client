@@ -6,8 +6,8 @@ import AddFormModal from '../../components/add-form-modal/add-form-modal.compone
 
 import TableActionButton from '../../components/table-action-button/table-action-button.component';
 import useSearchColumn from '../../utils/function/use-search.state';
-import ModalForm from '../../components/modal-form/modal-form.component';
 import DataTable from '../../components/data-table/data-table.component';
+import ModalButton from '../../components/modal-button/modal-button.component';
 
 const OrgGroupList = () => {
 	// Test Use Fetch
@@ -148,7 +148,7 @@ const OrgGroupList = () => {
 						Download
 					</CSVLink>
 				</Button>
-				<ModalForm buttonLabel='Add' />
+				<ModalButton buttonLabel='Add' />
 				<AddFormModal
 					buttonLabel='Add'
 					onCreate={onCreate}

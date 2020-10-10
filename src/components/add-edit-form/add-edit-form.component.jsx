@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input } from 'antd';
 
 const AddEditForm = ({ form, record, buttonLabel }) => {
-	const [formValues, setFormValues] = useState({
-		id: '',
-		code: '',
-		name: '',
-	});
+	const [formValues, setFormValues] = useState({});
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
