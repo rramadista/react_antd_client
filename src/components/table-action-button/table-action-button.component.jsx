@@ -1,12 +1,13 @@
 import React from 'react';
 import { Space, Button, Popconfirm } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 
 import ModalButton from '../modal-button/modal-button.component';
 
 const TableActionButton = ({ onDeleteConfirm, updateDataItem, record }) => {
 	return (
 		<Space>
+			<Button icon={<EyeOutlined />}>View</Button>
 			<ModalButton
 				buttonLabel='Edit'
 				updateDataItem={updateDataItem}

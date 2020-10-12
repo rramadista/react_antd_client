@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Space } from 'antd';
+import {
+	Button,
+	Checkbox,
+	Dropdown,
+	Menu,
+	message,
+	Row,
+	Col,
+	Select,
+	Space,
+} from 'antd';
 
 import DataTable from '../../components/data-table/data-table.component';
 import DownloadButton from '../../components/download-button/download-button.component';
@@ -7,9 +17,16 @@ import UploadButton from '../../components/upload-button/upload-button.component
 import ModalButton from '../../components/modal-button/modal-button.component';
 import DeleteSelectionButton from '../../components/delete-selection-button/delete-selection-button.component';
 
+const { Option } = Select;
+
 const OrgGroupPage = () => {
 	const [data, setData] = useState([]);
 	const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+	const [visibleMenu, setVisibleMenu] = useState(false);
+
+	const onVisibleMenuChange = (flag) => {
+		setVisibleMenu(flag);
+	};
 
 	const addItemToData = (item) => {
 		setData([...data, item]);
@@ -43,25 +60,85 @@ const OrgGroupPage = () => {
 		setSelectedRowKeys([]);
 	};
 
-	const onSelectChange = (selectedRowKeys) => {
+	const onSelectRowChange = (selectedRowKeys) => {
 		console.log(`selectedRowKeys changed: `, selectedRowKeys);
 		setSelectedRowKeys(selectedRowKeys);
 	};
 
-	const rowSelection = { selectedRowKeys, onChange: onSelectChange };
+	const rowSelection = { selectedRowKeys, onChange: onSelectRowChange };
+
+	const dropdownMenu = (
+		<Menu>
+			<Menu.Item key='1'>
+				<Checkbox id='code' onChange={null} defaultChecked>
+					Code
+				</Checkbox>
+			</Menu.Item>
+			<Menu.Item key='2'>
+				<Checkbox id='name' onChange={null} defaultChecked>
+					Name
+				</Checkbox>
+			</Menu.Item>
+		</Menu>
+	);
+
+	const onSelectOptionChange = (value) => {
+		message.success(`Selected ${value}`);
+	};
 
 	return (
 		<>
-			<Space>
-				<DownloadButton data={data} filename='org-group' />
-				<UploadButton addMultipleItemsToData={addMultipleItemsToData} />
-				<ModalButton buttonLabel='Add' addItemToData={addItemToData} />
-				<DeleteSelectionButton
-					selectedRowKeys={selectedRowKeys}
-					setSelectedRowKeys={setSelectedRowKeys}
-					deleteMultipleItemsFromData={deleteMultipleItemsFromData}
-				/>
-			</Space>
+			<Row>
+				<Col span={12}>
+					<Space>
+						<DownloadButton data={data} filename='org-group' />
+						<UploadButton
+							addMultipleItemsToData={addMultipleItemsToData}
+						/>
+						<ModalButton
+							buttonLabel='Add'
+							addItemToData={addItemToData}
+						/>
+						<DeleteSelectionButton
+							selectedRowKeys={selectedRowKeys}
+							setSelectedRowKeys={setSelectedRowKeys}
+							deleteMultipleItemsFromData={
+								deleteMultipleItemsFromData
+							}
+						/>
+					</Space>
+				</Col>
+				<Col span={12}>
+					<Space style={{ float: 'right' }}>
+						<Dropdown
+							overlay={dropdownMenu}
+							onVisibleChange={onVisibleMenuChange}
+							visible={visibleMenu}
+						>
+							<Button style={{ marginBottom: 16 }}>
+								Show/Hide
+							</Button>
+						</Dropdown>
+						<Select
+							showSearch
+							allowClear
+							style={{ width: 120, marginBottom: 16 }}
+							placeholder='Year'
+							optionFilterProp='value'
+							filterOption={(input, option) =>
+								option.value
+									.toLowerCase()
+									.indexOf(input.toLowerCase()) >= 0
+							}
+							onChange={onSelectOptionChange}
+						>
+							<Option value='2018'>2018</Option>
+							<Option value='2019'>2019</Option>
+							<Option value='2020'>2020</Option>
+						</Select>
+					</Space>
+				</Col>
+			</Row>
 			<DataTable
 				data={data}
 				setData={setData}
