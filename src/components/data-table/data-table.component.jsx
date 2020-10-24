@@ -40,7 +40,11 @@ const DataTable = ({
 			.then((res) => res.json())
 			.then((data) => {
 				setLoading(false);
-				setData(data.results);
+				if (data.results === undefined) {
+					return null;
+				} else {
+					setData(data.results);
+				}
 				setPagination({
 					...params.pagination,
 					total: data.total,
