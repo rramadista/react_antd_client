@@ -16,6 +16,7 @@ import DownloadButton from '../../components/download-button/download-button.com
 import UploadButton from '../../components/upload-button/upload-button.component';
 import ModalButton from '../../components/modal-button/modal-button.component';
 import DeleteSelectionButton from '../../components/delete-selection-button/delete-selection-button.component';
+import WipeButton from '../../components/wipe-button/wipe-button.component';
 
 const { Option } = Select;
 
@@ -60,6 +61,12 @@ const OrgGroupPage = () => {
 		setSelectedRowKeys([]);
 	};
 
+	const deleteAllItems = () => {
+		let updatedData = [];
+		setData(updatedData);
+		setSelectedRowKeys([]);
+	};
+
 	const onSelectRowChange = (selectedRowKeys) => {
 		console.log(`selectedRowKeys changed: `, selectedRowKeys);
 		setSelectedRowKeys(selectedRowKeys);
@@ -99,6 +106,7 @@ const OrgGroupPage = () => {
 							buttonLabel='Add'
 							addItemToData={addItemToData}
 						/>
+						<WipeButton deleteAllItems={deleteAllItems} />
 						<DeleteSelectionButton
 							selectedRowKeys={selectedRowKeys}
 							setSelectedRowKeys={setSelectedRowKeys}

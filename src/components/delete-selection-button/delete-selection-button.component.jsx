@@ -8,7 +8,7 @@ const DeleteSelectionButton = ({
 }) => {
 	const onSelectedDelete = (id) => {
 		console.log(id);
-		fetch(`http://localhost:5000/org-group`, {
+		fetch(`http://localhost:5000/org-group/bulk`, {
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(id),
@@ -31,7 +31,6 @@ const DeleteSelectionButton = ({
 					cancelText='No'
 				>
 					<Button
-						type='primary'
 						disabled={!hasSelected}
 						icon={<DeleteOutlined />}
 						danger
