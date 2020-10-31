@@ -50,7 +50,13 @@ const ModalButton = ({
 		})
 			.then((res) => res.json())
 			.then(() => addItemToData(values))
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data);
+					console.log(err.response.status);
+					console.log(err.response.headers);
+				}
+			});
 		message.success(`Success created ${values.id} record`);
 	};
 

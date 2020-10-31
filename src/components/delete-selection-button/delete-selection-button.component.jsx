@@ -29,6 +29,7 @@ const DeleteSelectionButton = ({
 					onCancel={null}
 					okText='Yes'
 					cancelText='No'
+					disabled={!hasSelected}
 				>
 					<Button
 						disabled={!hasSelected}

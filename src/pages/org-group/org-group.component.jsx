@@ -96,7 +96,7 @@ const OrgGroupPage = () => {
 	return (
 		<>
 			<Row>
-				<Col span={12}>
+				<Col span={16}>
 					<Space>
 						<DownloadButton data={data} filename='org-group' />
 						<UploadButton
@@ -116,7 +116,7 @@ const OrgGroupPage = () => {
 						/>
 					</Space>
 				</Col>
-				<Col span={12}>
+				<Col span={8}>
 					<Space style={{ float: 'right' }}>
 						<Dropdown
 							overlay={dropdownMenu}
