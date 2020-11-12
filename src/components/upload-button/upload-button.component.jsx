@@ -4,17 +4,20 @@ import { UploadOutlined } from '@ant-design/icons';
 import papa from 'papaparse';
 
 const UploadButton = ({ addMultipleItemsToData }) => {
-	const onUpload = (values) => {
+	const onUpload = async (values) => {
 		console.log(values);
-		fetch(`http://localhost:5000/org-group/bulk`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(values),
-		})
-			.then((res) => res.json())
-			.then(() => addMultipleItemsToData(values))
-			.catch((err) => console.log(err));
-		message.success(`Success created bulk record`);
+		try {
+			await fetch(`http://localhost:5000/org-group/bulk`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(values),
+			})
+				.then((res) => res.json())
+				.then(() => addMultipleItemsToData(values));
+			message.success(`Success created bulk record`);
+		} catch (err) {
+			message.error(`Error created bulk record`);
+		}
 	};
 
 	return (

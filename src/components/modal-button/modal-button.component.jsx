@@ -40,38 +40,38 @@ const ModalButton = ({
 		title = 'Update Collection';
 	}
 
-	const onCreate = (values) => {
+	const onCreate = async (values) => {
 		toggleModal();
 		console.log(values);
-		fetch(`http://localhost:5000/org-group`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(values),
-		})
-			.then((res) => res.json())
-			.then(() => addItemToData(values))
-			.catch((err) => {
-				if (err.response) {
-					console.log(err.response.data);
-					console.log(err.response.status);
-					console.log(err.response.headers);
-				}
-			});
-		message.success(`Success created ${values.id} record`);
+		try {
+			await fetch(`http://localhost:5000/org-group`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(values),
+			})
+				.then((res) => res.json())
+				.then(() => addItemToData(values));
+			message.success(`Success created ${values.id} record`);
+		} catch (err) {
+			message.error(`Error created ${values.id} record`);
+		}
 	};
 
-	const onUpdate = (values) => {
+	const onUpdate = async (values) => {
 		toggleModal();
 		console.log(values);
-		fetch(`http://localhost:5000/org-group/${values.id}`, {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(values),
-		})
-			.then((res) => res.json())
-			.then(() => updateDataItem(values))
-			.catch((err) => console.log(err));
-		message.success(`Success updated ${values.id} record`);
+		try {
+			await fetch(`http://localhost:5000/org-group/${values.id}`, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(values),
+			})
+				.then((res) => res.json())
+				.then(() => updateDataItem(values));
+			message.success(`Success updated ${values.id} record`);
+		} catch (err) {
+			message.error(`Success updated ${values.id} record`);
+		}
 	};
 
 	return (

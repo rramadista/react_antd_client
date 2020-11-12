@@ -43,7 +43,7 @@ const OrgGroupList = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				setLoading(false);
-				setData(data.results);
+				setData(data.results.items);
 				setPagination({
 					...params.pagination,
 					total: data.total,

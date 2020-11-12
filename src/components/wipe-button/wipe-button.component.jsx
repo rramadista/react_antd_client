@@ -4,12 +4,14 @@ import { DeleteOutlined } from '@ant-design/icons';
 
 const WipeButton = ({ deleteAllItems }) => {
 	const onDeleteAll = () => {
-		fetch(`http://localhost:5000/org-group`, {
-			method: 'DELETE',
-		})
-			.then(() => deleteAllItems())
-			.catch((err) => console.log(err));
-		message.success(`Success deleted all record`);
+		try {
+			fetch(`http://localhost:5000/org-group`, {
+				method: 'DELETE',
+			}).then(() => deleteAllItems());
+			message.success(`Success deleted all record`);
+		} catch (err) {
+			message.error(`Error deleted all record`);
+		}
 	};
 
 	return (
