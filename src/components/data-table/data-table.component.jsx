@@ -138,51 +138,6 @@ const DataTable = ({
 		message.success(`Success deleted ${id} record`);
 	};
 
-	// Use Get Columns
-	// const { getColumnSearchProps } = useSearchColumn();
-
-	// const columns = [
-	// 	{
-	// 		title: 'Org Group ID',
-	// 		dataIndex: 'id',
-	// 		key: 'id',
-	// 		...getColumnSearchProps('id'),
-	// 		sorter: (a, b) => a.id.localeCompare(b.id),
-	// 		defaultSortOrder: 'ascend',
-	// 		sortDirections: ['descend', 'ascend', 'descend'],
-	// 		width: 150,
-	// 	},
-	// 	{
-	// 		title: 'Org Group Code',
-	// 		dataIndex: 'code',
-	// 		key: 'code',
-	// 		...getColumnSearchProps('code'),
-	// 		sorter: (a, b) => a.code.localeCompare(b.code),
-	// 		sortDirections: ['ascend', 'descend'],
-	// 		width: 170,
-	// 	},
-	// 	{
-	// 		title: 'Organization Group Name',
-	// 		dataIndex: 'name',
-	// 		key: 'name',
-	// 		...getColumnSearchProps('name'),
-	// 		sorter: (a, b) => a.name.localeCompare(b.name),
-	// 		sortDirections: ['ascend', 'descend'],
-	// 		width: 400,
-	// 	},
-	// 	{
-	// 		title: 'Action',
-	// 		key: 'action',
-	// 		render: (text, record) => (
-	// 			<TableActionButton
-	// 				onDeleteConfirm={() => onDeleteConfirm(record.id)}
-	// 				updateDataItem={updateDataItem}
-	// 				record={record}
-	// 			/>
-	// 		),
-	// 	},
-	// ];
-
 	const dropdownMenu = (
 		<Menu>
 			{initialColumns

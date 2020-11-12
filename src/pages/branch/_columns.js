@@ -1,9 +1,10 @@
 import React from 'react';
+import { Space, Button } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { Tag } from 'antd';
 
 import useSearchColumn from '../../utils/function/use-search.state';
-import TableActionButton from '../../components/table-action-button/table-action-button.component';
 
 const useGetColumns = () => {
 	const { getColumnSearchProps } = useSearchColumn();
@@ -87,7 +88,14 @@ const useGetColumns = () => {
 		{
 			title: 'Action',
 			key: 'action',
-			render: (text, record) => <TableActionButton />,
+			render: (text, record) => (
+				<Space>
+					<Button icon={<EditOutlined />}>Edit</Button>
+					<Button icon={<DeleteOutlined />} danger>
+						Delete
+					</Button>
+				</Space>
+			),
 			responsive: ['xl'],
 		},
 	];
