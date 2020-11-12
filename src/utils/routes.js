@@ -14,13 +14,13 @@ import OrgChart from '../pages/org-chart/org-chart.component';
 import UserList from '../pages/user/user.component';
 import EmployeeList from '../pages/employee/employee.component';
 import OrgGroupList from '../pages/org-group/org-group-list.component';
-import UseStateExample from '../pages/hooks/use-state.component';
-import UseEffectExample from '../pages/hooks/use-effect.component';
-import UseMemoExample from '../pages/hooks/use-memo.component';
-import UseRefExample from '../pages/hooks/use-ref.component';
-import UseContextExample from '../pages/hooks/use-context.component';
-import UseReducerExample from '../pages/hooks/use-reducer.component';
-import UseCallbackExample from '../pages/hooks/use-callback.component';
+import UseStateExample from '../pages/hooks-example/use-state.component';
+import UseEffectExample from '../pages/hooks-example/use-effect.component';
+import UseMemoExample from '../pages/hooks-example/use-memo.component';
+import UseRefExample from '../pages/hooks-example/use-ref.component';
+import UseContextExample from '../pages/hooks-example/use-context.component';
+import UseReducerExample from '../pages/hooks-example/use-reducer.component';
+import UseCallbackExample from '../pages/hooks-example/use-callback.component';
 import OrgGroupPage from '../pages/org-group/org-group.component';
 
 const sections = [

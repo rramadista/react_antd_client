@@ -5,7 +5,7 @@ import './App.css';
 import UserContext from './services/user.context';
 
 import DefaultLayout from './containers/default-layout.container';
-import ThemeProvider from './pages/hooks/theme.context';
+import ThemeProvider from './pages/hooks-example/theme.context';
 import DataTableProvider from './services/hooks/data-table/data-table.context';
 
 const App = () => {
