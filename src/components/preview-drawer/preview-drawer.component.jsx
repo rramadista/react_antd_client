@@ -25,13 +25,13 @@ const PreviewDrawer = ({ onClose, visible, data }) => {
 				<Row>
 					<DescriptionItem
 						title='Position Title'
-						content={data.name}
+						content={<strong>{data.name}</strong>}
 					/>
 				</Row>
 				<Row>
 					<DescriptionItem
 						title='Business Unit'
-						content={data.businessUnit}
+						content={<strong>{data.code}</strong>}
 					/>
 				</Row>
 				<Row>

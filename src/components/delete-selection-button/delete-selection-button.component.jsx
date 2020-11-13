@@ -6,16 +6,20 @@ const DeleteSelectionButton = ({
 	selectedRowKeys,
 	deleteMultipleItemsFromData,
 }) => {
-	const onSelectedDelete = (id) => {
+	const onSelectedDelete = async (id) => {
 		console.log(id);
-		fetch(`http://localhost:5000/org-group/bulk`, {
-			method: 'DELETE',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(id),
-		})
-			.then(() => deleteMultipleItemsFromData(id))
-			.catch((err) => console.log(err));
-		message.success(`Success deleted bulk record`);
+		try {
+			await fetch(`http://localhost:5000/org-group/bulk`, {
+				method: 'DELETE',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(id),
+			})
+				.then(() => deleteMultipleItemsFromData(id))
+				.catch((err) => console.log(err));
+			message.success(`Success deleted bulk record`);
+		} catch (err) {
+			message.error(`Error deleted bulk record`);
+		}
 	};
 
 	const hasSelected = selectedRowKeys.length > 0;
@@ -41,7 +45,7 @@ const DeleteSelectionButton = ({
 				</Popconfirm>
 				<span style={{ marginLeft: 8 }}>
 					{hasSelected
-						? `Selected ${selectedRowKeys.length} items ${selectedRowKeys}`
+						? `Selected ${selectedRowKeys.length} items`
 						: ''}
 				</span>
 			</div>
