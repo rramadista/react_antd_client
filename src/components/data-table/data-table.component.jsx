@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Table, message } from 'antd';
+import React from 'react';
+import { Table } from 'antd';
 
 const DataTable = (props) => {
 	return (

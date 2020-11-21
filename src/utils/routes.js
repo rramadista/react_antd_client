@@ -21,7 +21,8 @@ import UseRefExample from '../pages/hooks-example/use-ref.component';
 import UseContextExample from '../pages/hooks-example/use-context.component';
 import UseReducerExample from '../pages/hooks-example/use-reducer.component';
 import UseCallbackExample from '../pages/hooks-example/use-callback.component';
-import OrgGroupPage from '../pages/org-group/org-group.component';
+import OrgGroupSimple from '../pages/org-group/org-group-simple.component';
+import OrgGroupComplex from '../pages/org-group/org-group-complex.component';
 
 const sections = [
 	{ path: '/', exact: true, title: 'Home', component: () => <Home /> },
@@ -39,9 +40,14 @@ const sections = [
 		component: () => <OrgGroupList />,
 	},
 	{
-		path: '/org-group-page',
-		title: 'Organization Group Page',
-		component: () => <OrgGroupPage />,
+		path: '/org-group-simple',
+		title: 'Organization Group Simple',
+		component: () => <OrgGroupSimple />,
+	},
+	{
+		path: '/org-group-complex',
+		title: 'Organization Group Complex',
+		component: () => <OrgGroupComplex />,
 	},
 	{
 		path: '/organization',

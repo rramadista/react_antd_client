@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
 	Button,
 	Checkbox,
@@ -21,24 +21,31 @@ import WipeButton from '../../components/wipe-button/wipe-button.component';
 import TableActionButton from '../../components/table-action-button/table-action-button.component';
 import useSearchColumn from '../../utils/function/use-search.state';
 
+import { DataTableContext } from '../../services/hooks/data-table/data-table.context';
+
 const { Option } = Select;
 
-const OrgGroupPage = () => {
-	const [data, setData] = useState([]);
-	const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-	const [visibleMenu, setVisibleMenu] = useState(false);
-
-	const [loading, setLoading] = useState(false);
-	const [pagination, setPagination] = useState({
-		current: 1,
-		pageSize: 10,
-		showTotal: (total, range) =>
-			`${range[0]}-${range[1]} of ${total} items`,
-		hideOnSinglePage: true, // hide pagination when single page or no data
-	});
-
+const OrgGroupComplex = () => {
 	const { getColumnSearchProps } = useSearchColumn();
 
+	const {
+		loading,
+		data,
+		selectedRowKeys,
+		pagination,
+		addItemToData,
+		addMultipleItemsToData,
+		updateDataItem,
+		deleteItemFromData,
+		deleteMultipleItemsFromData,
+		deleteAllItems,
+		getData,
+		getDataSuccess,
+		getDataFailure,
+		onSelectRowChange,
+	} = useContext(DataTableContext);
+
+	const [visibleMenu, setVisibleMenu] = useState(false);
 	const [checkedColumns, setCheckedColumns] = useState([]);
 	const [initialColumns, setInitialColumns] = useState([]);
 	const [columns, setColumns] = useState([
@@ -83,6 +90,12 @@ const OrgGroupPage = () => {
 		},
 	]);
 
+	useEffect(() => {
+		setInitialColumns(columns);
+		fetchData({ pagination });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const onVisibleMenuChange = (flag) => {
 		setVisibleMenu(flag);
 	};
@@ -106,12 +119,6 @@ const OrgGroupPage = () => {
 		setCheckedColumns(checkedItems);
 	};
 
-	useEffect(() => {
-		setInitialColumns(columns);
-		fetchData({ pagination });
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	const handleTableChange = (pagination, filters, sorter) => {
 		fetchData({
 			sortField: sorter.field,
@@ -122,70 +129,16 @@ const OrgGroupPage = () => {
 	};
 
 	const fetchData = async (params = {}) => {
-		setLoading(true);
+		getData();
 		try {
 			await fetch(`http://localhost:5000/org-group`)
 				.then((res) => res.json())
-				.then((data) => {
-					setLoading(false);
-					if (data.results.items === undefined) {
-						return null;
-					} else {
-						setData(data.results.items);
-					}
-					setPagination({
-						...params.pagination,
-						total: data.total,
-					});
-				})
+				.then((data) => getDataSuccess(data))
 				.then(() => message.success(`Success fetch data`));
 		} catch (err) {
+			getDataFailure();
 			message.error(`Fetching error or no data`);
-			setLoading(false);
 		}
-	};
-
-	const addItemToData = (item) => {
-		setData([...data, item]);
-	};
-
-	const addMultipleItemsToData = (items) => {
-		setData(data.concat(items));
-	};
-
-	const updateDataItem = (item) => {
-		const itemIndex = data.findIndex((record) => record.id === item.id);
-		const updatedData = [
-			...data.slice(0, itemIndex),
-			item,
-			...data.slice(itemIndex + 1),
-		];
-		setData(updatedData);
-	};
-
-	const deleteItemFromData = (id) => {
-		const updatedData = data.filter((record) => record.id !== id);
-		setData(updatedData);
-	};
-
-	const deleteMultipleItemsFromData = (ids) => {
-		let updatedData = [...data];
-		ids.forEach((id) => {
-			updatedData = updatedData.filter((record) => record.id !== id);
-		});
-		setData(updatedData);
-		setSelectedRowKeys([]);
-	};
-
-	const deleteAllItems = () => {
-		let updatedData = [];
-		setData(updatedData);
-		setSelectedRowKeys([]);
-	};
-
-	const onSelectRowChange = (selectedRowKeys) => {
-		console.log(`selectedRowKeys changed: `, selectedRowKeys);
-		setSelectedRowKeys(selectedRowKeys);
 	};
 
 	const rowSelection = { selectedRowKeys, onChange: onSelectRowChange };
@@ -240,7 +193,6 @@ const OrgGroupPage = () => {
 						<WipeButton deleteAllItems={deleteAllItems} />
 						<DeleteSelectionButton
 							selectedRowKeys={selectedRowKeys}
-							setSelectedRowKeys={setSelectedRowKeys}
 							deleteMultipleItemsFromData={
 								deleteMultipleItemsFromData
 							}
@@ -280,12 +232,8 @@ const OrgGroupPage = () => {
 			</Row>
 			<DataTable
 				data={data}
-				setData={setData}
-				updateDataItem={updateDataItem}
-				deleteItemFromData={deleteItemFromData}
 				rowSelection={rowSelection}
 				columns={columns}
-				setInitialColumns={setInitialColumns}
 				pagination={pagination}
 				loading={loading}
 				handleTableChange={handleTableChange}
@@ -294,4 +242,4 @@ const OrgGroupPage = () => {
 	);
 };
 
-export default OrgGroupPage;
+export default OrgGroupComplex;
