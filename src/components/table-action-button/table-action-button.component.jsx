@@ -5,14 +5,14 @@ import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import ModalButton from '../modal-button/modal-button.component';
 import PreviewDrawer from '../preview-drawer/preview-drawer.component';
 
-const TableActionButton = ({ onDeleteConfirm, updateDataItem, record }) => {
+const TableActionButton = ({ onDeleteConfirm, record }) => {
 	const [visibleDrawer, setVisibleDrawer] = useState(false);
 
 	const showDrawer = () => {
 		setVisibleDrawer(true);
 	};
 
-	const onClose = () => {
+	const onCloseDrawer = () => {
 		setVisibleDrawer(false);
 	};
 
@@ -22,11 +22,7 @@ const TableActionButton = ({ onDeleteConfirm, updateDataItem, record }) => {
 				<Button icon={<EyeOutlined />} onClick={showDrawer}>
 					View
 				</Button>
-				<ModalButton
-					buttonLabel='Edit'
-					updateDataItem={updateDataItem}
-					record={record}
-				/>
+				<ModalButton buttonLabel='Edit' record={record} />
 				<Popconfirm
 					title='Are you sure to delete this row?'
 					onConfirm={onDeleteConfirm}
@@ -40,7 +36,7 @@ const TableActionButton = ({ onDeleteConfirm, updateDataItem, record }) => {
 				</Popconfirm>
 			</Space>
 			<PreviewDrawer
-				onClose={onClose}
+				onClose={onCloseDrawer}
 				visible={visibleDrawer}
 				data={record}
 			/>

@@ -5,6 +5,9 @@ const DataTableActionTypes = {
 
 	SELECT_ROWS: 'select-rows',
 
+	SHOW_DRAWER: 'show-drawer',
+	CLOSE_DRAWER: 'close-drawer',
+
 	ADD_ITEM: 'add-item',
 	ADD_MULTIPLE_ITEMS: 'add-multiple-items',
 	EDIT_ITEM: 'edit-item',

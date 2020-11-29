@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Popconfirm, Button, message } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
-const WipeButton = ({ deleteAllItems }) => {
+import { DataTableContext } from '../../services/hooks/data-table/data-table.context';
+
+const WipeButton = () => {
+	const { deleteAllItems } = useContext(DataTableContext);
+
 	const onDeleteAll = () => {
 		try {
 			fetch(`http://localhost:5000/org-group`, {

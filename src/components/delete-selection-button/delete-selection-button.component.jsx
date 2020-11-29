@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Popconfirm, Button, message } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
-const DeleteSelectionButton = ({
-	selectedRowKeys,
-	deleteMultipleItemsFromData,
-}) => {
+import { DataTableContext } from '../../services/hooks/data-table/data-table.context';
+
+const DeleteSelectionButton = () => {
+	const { selectedRowKeys, deleteMultipleItemsFromData } = useContext(
+		DataTableContext
+	);
+
 	const onSelectedDelete = async (id) => {
 		console.log(id);
 		try {
@@ -15,8 +18,7 @@ const DeleteSelectionButton = ({
 				body: JSON.stringify(id),
 			})
 				.then(() => deleteMultipleItemsFromData(id))
-				.catch((err) => console.log(err));
-			message.success(`Success deleted bulk record`);
+				.then(() => message.success(`Success deleted bulk record`));
 		} catch (err) {
 			message.error(`Error deleted bulk record`);
 		}

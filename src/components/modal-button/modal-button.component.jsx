@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, Form, message } from 'antd';
 import { EditOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import AddEditForm from '../add-edit-form/add-edit-form.component';
 
-const ModalButton = ({
-	buttonLabel,
-	record,
-	updateDataItem,
-	addItemToData,
-}) => {
+import { DataTableContext } from '../../services/hooks/data-table/data-table.context';
+
+const ModalButton = ({ buttonLabel, record }) => {
+	const { addItemToData, updateDataItem } = useContext(DataTableContext);
+
 	const [form] = Form.useForm();
 	const [visible, setVisible] = useState(false);
 

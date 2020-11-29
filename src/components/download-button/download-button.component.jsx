@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'antd';
 import { FileExcelOutlined } from '@ant-design/icons';
 import { CSVLink } from 'react-csv';
 
-const DownloadButton = ({ data, filename }) => {
+import { DataTableContext } from '../../services/hooks/data-table/data-table.context';
+
+const DownloadButton = ({ filename }) => {
+	const { data } = useContext(DataTableContext);
 	return (
 		<Button
 			icon={<FileExcelOutlined />}

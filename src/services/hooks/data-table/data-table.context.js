@@ -68,6 +68,14 @@ const DataTableProvider = ({ children }) => {
 		dispatch({ type: 'select-rows', payload: keys });
 	};
 
+	const showDrawer = () => {
+		dispatch({ type: 'show-drawer' });
+	};
+
+	const onCloseDrawer = () => {
+		dispatch({ type: 'close-drawer' });
+	};
+
 	return (
 		<DataTableContext.Provider
 			value={{
@@ -75,6 +83,7 @@ const DataTableProvider = ({ children }) => {
 				data: state.data,
 				selectedRowKeys: state.selectedRowKeys,
 				pagination: state.pagination,
+				visibleDrawer: state.visibleDrawer,
 				addItemToData,
 				addMultipleItemsToData,
 				updateDataItem,
@@ -85,6 +94,8 @@ const DataTableProvider = ({ children }) => {
 				getDataSuccess,
 				getDataFailure,
 				onSelectRowChange,
+				showDrawer,
+				onCloseDrawer,
 			}}
 		>
 			{children}

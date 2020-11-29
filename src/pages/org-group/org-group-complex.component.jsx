@@ -29,23 +29,14 @@ const OrgGroupComplex = () => {
 	const { getColumnSearchProps } = useSearchColumn();
 
 	const {
-		loading,
-		data,
-		selectedRowKeys,
 		pagination,
-		addItemToData,
-		addMultipleItemsToData,
-		updateDataItem,
 		deleteItemFromData,
-		deleteMultipleItemsFromData,
-		deleteAllItems,
 		getData,
 		getDataSuccess,
 		getDataFailure,
-		onSelectRowChange,
 	} = useContext(DataTableContext);
 
-	const [visibleMenu, setVisibleMenu] = useState(false);
+	const [visibleColumnMenu, setVisibleColumnMenu] = useState(false);
 	const [checkedColumns, setCheckedColumns] = useState([]);
 	const [initialColumns, setInitialColumns] = useState([]);
 	const [columns, setColumns] = useState([
@@ -83,7 +74,7 @@ const OrgGroupComplex = () => {
 			render: (text, record) => (
 				<TableActionButton
 					onDeleteConfirm={() => onDeleteConfirm(record.id)}
-					updateDataItem={updateDataItem}
+					// updateDataItem={updateDataItem}
 					record={record}
 				/>
 			),
@@ -96,8 +87,8 @@ const OrgGroupComplex = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const onVisibleMenuChange = (flag) => {
-		setVisibleMenu(flag);
+	const onVisibleColumnMenuChange = (flag) => {
+		setVisibleColumnMenu(flag);
 	};
 
 	const onColumnChange = (e) => {
@@ -141,23 +132,24 @@ const OrgGroupComplex = () => {
 		}
 	};
 
-	const rowSelection = { selectedRowKeys, onChange: onSelectRowChange };
-
 	const onSelectOptionChange = (value) => {
 		message.success(`Selected ${value}`);
 	};
 
-	const onDeleteConfirm = (id) => {
+	const onDeleteConfirm = async (id) => {
 		console.log(id);
-		fetch(`http://localhost:5000/org-group/${id}`, {
-			method: 'DELETE',
-		})
-			.then(() => deleteItemFromData(id))
-			.catch((err) => console.log(err));
-		message.success(`Success deleted ${id} record`);
+		try {
+			await fetch(`http://localhost:5000/org-group/${id}`, {
+				method: 'DELETE',
+			})
+				.then(() => deleteItemFromData(id))
+				.then(() => message.success(`Success deleted ${id} record`));
+		} catch (err) {
+			message.error(`Error deleted ${id} record`);
+		}
 	};
 
-	const dropdownMenu = (
+	const dropdownColumnMenu = (
 		<Menu>
 			{initialColumns
 				.filter((column) => column.dataIndex)
@@ -182,29 +174,19 @@ const OrgGroupComplex = () => {
 			<Row>
 				<Col span={16}>
 					<Space>
-						<DownloadButton data={data} filename='org-group' />
-						<UploadButton
-							addMultipleItemsToData={addMultipleItemsToData}
-						/>
-						<ModalButton
-							buttonLabel='Add'
-							addItemToData={addItemToData}
-						/>
-						<WipeButton deleteAllItems={deleteAllItems} />
-						<DeleteSelectionButton
-							selectedRowKeys={selectedRowKeys}
-							deleteMultipleItemsFromData={
-								deleteMultipleItemsFromData
-							}
-						/>
+						<DownloadButton filename='org-group' />
+						<UploadButton />
+						<ModalButton buttonLabel='Add' />
+						<WipeButton />
+						<DeleteSelectionButton />
 					</Space>
 				</Col>
 				<Col span={8}>
 					<Space style={{ float: 'right' }}>
 						<Dropdown
-							overlay={dropdownMenu}
-							onVisibleChange={onVisibleMenuChange}
-							visible={visibleMenu}
+							overlay={dropdownColumnMenu}
+							onVisibleChange={onVisibleColumnMenuChange}
+							visible={visibleColumnMenu}
 						>
 							<Button style={{ marginBottom: 16 }}>
 								Show/Hide
@@ -231,11 +213,7 @@ const OrgGroupComplex = () => {
 				</Col>
 			</Row>
 			<DataTable
-				data={data}
-				rowSelection={rowSelection}
 				columns={columns}
-				pagination={pagination}
-				loading={loading}
 				handleTableChange={handleTableChange}
 			/>
 		</>

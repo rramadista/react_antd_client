@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import papa from 'papaparse';
 import { Button, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import papa from 'papaparse';
 
-const UploadButton = ({ addMultipleItemsToData }) => {
+import { DataTableContext } from '../../services/hooks/data-table/data-table.context';
+
+const UploadButton = () => {
+	const { addMultipleItemsToData } = useContext(DataTableContext);
+
 	const onUpload = async (values) => {
 		console.log(values);
 		try {

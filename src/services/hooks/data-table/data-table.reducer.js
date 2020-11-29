@@ -11,6 +11,7 @@ export const INITIAL_STATE = {
 		hideOnSinglePage: true,
 	},
 	selectedRowKeys: [],
+	visibleDrawer: false,
 };
 
 export const dataTableReducer = (state = INITIAL_STATE, action) => {
@@ -36,6 +37,16 @@ export const dataTableReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				selectedRowKeys: action.payload,
+			};
+		case DataTableActionTypes.SHOW_DRAWER:
+			return {
+				...state,
+				visibleDrawer: true,
+			};
+		case DataTableActionTypes.CLOSE_DRAWER:
+			return {
+				...state,
+				visibleDrawer: false,
 			};
 		case DataTableActionTypes.ADD_ITEM:
 			return {
@@ -65,7 +76,7 @@ export const dataTableReducer = (state = INITIAL_STATE, action) => {
 				data: state.data.filter((item) => item.id !== action.payload),
 			};
 		case DataTableActionTypes.DELETE_SELECTED_ITEMS:
-			const updatedData = [...state.data];
+			let updatedData = [...state.data];
 			action.payload.forEach((id) => {
 				updatedData = updatedData.filter((item) => item.id !== id);
 			});
